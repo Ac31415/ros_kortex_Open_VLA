@@ -4,11 +4,17 @@ project(kortex_driver)
 add_compile_options(-std=c++11)
 add_definitions(-D_OS_UNIX)
 
-option(USE_CONAN "Use the Conan package manager to automatically fetch the Kortex API" ON)
+# option(USE_CONAN "Use the Conan package manager to automatically fetch the Kortex API" ON)
+option(USE_CONAN "Use the Conan package manager to automatically fetch the Kortex API" OFF)
+
+# if(NOT CONAN_TARGET_PLATFORM)
+#   set(CONAN_TARGET_PLATFORM "x86")
+# endif()
 
 if(NOT CONAN_TARGET_PLATFORM)
-  set(CONAN_TARGET_PLATFORM "x86")
+  set(CONAN_TARGET_PLATFORM "jetson")
 endif()
+
 message("CONAN_TARGET_PLATFORM is ${CONAN_TARGET_PLATFORM}")
 
 # Explicitely specify the build type in case the user did not do it
@@ -75,6 +81,8 @@ function(get_closest_build_type VAR_OUT)
   endif()
 endfunction()
 
+# set(CONAN_SETTINGS -s compiler=clang -s compiler.version=16 -s compiler.libcxx=libc++)
+
 if(USE_CONAN)
   # Include conan.cmake module and download Kortex API from artifactory
   include(${PROJECT_SOURCE_DIR}/cmake/conan.cmake)
@@ -82,12 +90,16 @@ if(USE_CONAN)
   conan_add_remote(NAME kinova_public
                   URL https://artifactory.kinovaapps.com/artifactory/api/conan/conan-public)
   get_closest_build_type(CONAN_BUILD_TYPE)
+
   if("${CONAN_TARGET_PLATFORM}" STREQUAL "x86")
     conan_cmake_run(CONANFILE conanfile.py
                     UPDATE
                     BASIC_SETUP CMAKE_TARGETS
                     NO_OUTPUT_DIRS
-                    SETTINGS kortex_api_cpp:compiler=gcc kortex_api_cpp:compiler.version=5 kortex_api_cpp:compiler.libcxx=libstdc++11 kortex_api_cpp:build_type=${CONAN_BUILD_TYPE})
+                    SETTINGS kortex_api_cpp:compiler=gcc kortex_api_cpp:compiler.version=5 kortex_api_cpp:compiler.libcxx=libstdc++11 kortex_api_cpp:build_type=${CONAN_BUILD_TYPE}
+                    SETTINGS compiler=clang
+                    SETTINGS compiler.version=16
+                    SETTINGS compiler.libcxx=libc++)
   elseif("${CONAN_TARGET_PLATFORM}" STREQUAL "artik710")
     conan_cmake_run(CONANFILE conanfile.py
                     UPDATE
@@ -114,6 +126,8 @@ endif()
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 include_directories(include ${Boost_INCLUDE_DIRS})
+# include_directories(include ${Boost_INCLUDE_DIRS})
+# link_directories(include ${Boost_LIBRARY_DIRS})
 include_directories(include ${PROJECT_SOURCE_DIR}/src)
 include_directories(include ${PROJECT_SOURCE_DIR}/include)
 

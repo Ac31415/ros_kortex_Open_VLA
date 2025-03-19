@@ -252,9 +252,14 @@ int ToRosData(Kinova::Api::Base::NetworkHandle input, kortex_driver::NetworkHand
 int ToRosData(Kinova::Api::Base::IPv4Configuration input, kortex_driver::IPv4Configuration &output);
 int ToRosData(Kinova::Api::Base::IPv4Information input, kortex_driver::IPv4Information &output);
 int ToRosData(Kinova::Api::Base::FullIPv4Configuration input, kortex_driver::FullIPv4Configuration &output);
-int ToRosData(Kinova::Api::Base::WifiEnableState input, kortex_driver::WifiEnableState &output);
-int ToRosData(Kinova::Api::Base::BluetoothEnableState input, kortex_driver::BluetoothEnableState &output);
-int ToRosData(Kinova::Api::Base::RFConfiguration input, kortex_driver::RFConfiguration &output);
+// int ToRosData(Kinova::Api::Base::WifiEnableState input, kortex_driver::WifiEnableState &output);
+// int ToRosData(Kinova::Api::Base::BluetoothEnableState input, kortex_driver::BluetoothEnableState &output);
+// int ToRosData(Kinova::Api::Base::RFConfiguration input, kortex_driver::RFConfiguration &output);
+
+int ToRosData(kortex_driver::WifiEnableState input, kortex_driver::WifiEnableState &output);
+int ToRosData(kortex_driver::BluetoothEnableState input, kortex_driver::BluetoothEnableState &output);
+int ToRosData(kortex_driver::RFConfiguration input, kortex_driver::RFConfiguration &output);
+
 int ToRosData(Kinova::Api::Base::WifiInformation input, kortex_driver::WifiInformation &output);
 int ToRosData(Kinova::Api::Base::WifiInformationList input, kortex_driver::WifiInformationList &output);
 int ToRosData(Kinova::Api::Base::WifiConfiguration input, kortex_driver::WifiConfiguration &output);

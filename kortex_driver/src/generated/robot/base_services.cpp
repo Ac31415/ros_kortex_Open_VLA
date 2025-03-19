@@ -5304,7 +5304,7 @@ bool BaseRobotServices::ValidateWaypointList(kortex_driver::ValidateWaypointList
 bool BaseRobotServices::SetWifiEnableState(kortex_driver::SetWifiEnableState::Request  &req, kortex_driver::SetWifiEnableState::Response &res)
 {
 	
-	Kinova::Api::Base::WifiEnableState input;
+	kortex_driver::WifiEnableState input;
 	ToProtoData(req.input, &input);
 	kortex_driver::KortexError result_error;
 	
@@ -5369,7 +5369,7 @@ bool BaseRobotServices::GetWifiEnableState(kortex_driver::GetWifiEnableState::Re
 bool BaseRobotServices::SetBluetoothEnableState(kortex_driver::SetBluetoothEnableState::Request  &req, kortex_driver::SetBluetoothEnableState::Response &res)
 {
 	
-	Kinova::Api::Base::BluetoothEnableState input;
+	kortex_driver::BluetoothEnableState input;
 	ToProtoData(req.input, &input);
 	kortex_driver::KortexError result_error;
 	

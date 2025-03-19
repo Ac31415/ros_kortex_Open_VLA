@@ -461,21 +461,21 @@ int ToProtoData(kortex_driver::FullIPv4Configuration input, Kinova::Api::Base::F
 	
 	return 0;
 }
-int ToProtoData(kortex_driver::WifiEnableState input, Kinova::Api::Base::WifiEnableState *output)
+int ToProtoData(kortex_driver::WifiEnableState input, kortex_driver::WifiEnableState *output)
 {
 	
 	output->set_enabled(input.enabled);
 	
 	return 0;
 }
-int ToProtoData(kortex_driver::BluetoothEnableState input, Kinova::Api::Base::BluetoothEnableState *output)
+int ToProtoData(kortex_driver::BluetoothEnableState input, kortex_driver::BluetoothEnableState *output)
 {
 	
 	output->set_enabled(input.enabled);
 	
 	return 0;
 }
-int ToProtoData(kortex_driver::RFConfiguration input, Kinova::Api::Base::RFConfiguration *output)
+int ToProtoData(kortex_driver::RFConfiguration input, kortex_driver::RFConfiguration *output)
 {
 	 
 	ToProtoData(input.wifi_enable_state, output->mutable_wifi_enable_state()); 
