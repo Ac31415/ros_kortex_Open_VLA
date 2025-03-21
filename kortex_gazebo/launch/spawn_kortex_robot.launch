@@ -1,5 +1,7 @@
 <launch>
 
+    <!-- just testing the commit from the docker server -->
+
     <!-- Arguments -->
     <!-- Start the GUIs -->
     <arg name="start_gazebo" default="true"/>
